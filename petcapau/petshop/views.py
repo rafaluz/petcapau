@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import Pet
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse
 
 def helloWorld(request):
     mensagem = 'Olá, mundo!'
@@ -27,3 +28,11 @@ class PetList(ListView):
 class PetDetail(DetailView):
     model = Pet
     template_name = 'pet/pet_detail.html'
+
+class PetCreate(CreateView):
+    model = Pet
+    template_name = 'pet/pet_create.html'
+    fields = ['name','species','breed','sex','birth_date','hair','tatoo']
+
+    def get_success_url(self):
+        return reverse('petshop:pet_list')

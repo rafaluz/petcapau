@@ -3,6 +3,8 @@
 {% block title %} Listar Pets {% endblock %}
 {% block content %}
 
+    <a href="{% url 'petshop:pet_create' %}"><button>Novo Pet</button></a>
+
     {% for pet in object_list %}
     <p>Nome: {{ pet.name }}</p>
     <p>Espécie: {{ pet.species }}</p>
