@@ -3,7 +3,7 @@
 {% block title %} Listar Pets {% endblock %}
 {% block content %}
 
-    {% for pet in pets %}
+    {% for pet in object_list %}
     <p>Nome: {{ pet.name }}</p>
     <p>Espécie: {{ pet.species }}</p>
     <p>Raça: {{ pet.breed }}</p>
