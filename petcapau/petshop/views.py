@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import Pet
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 def helloWorld(request):
     mensagem = 'Olá, mundo!'
@@ -44,3 +44,9 @@ class PetUpdate(UpdateView):
 
     def get_success_url(self):
         return reverse('petshop:pet_list')
+
+class PetDelete(DeleteView):
+    model = Pet
+    template_name = 'pet/pet_confirm_delete.html'
+    success_url = reverse_lazy('petshop:pet_list')
+    

@@ -11,6 +11,7 @@
         <p>Raça: {{ pet.breed }}</p>
         <a href="{% url 'petshop:pet_detail' pet.pk  %}">Detalhes do Pet</a>
         <a href="{% url 'petshop:pet_update' pet.pk %}">Editar</a>
+        <a href="{% url 'petshop:pet_delete' pet.pk %}">Remover</a>
         <hr>
     {% endfor %}
 
