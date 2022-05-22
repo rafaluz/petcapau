@@ -36,3 +36,11 @@ class PetCreate(CreateView):
 
     def get_success_url(self):
         return reverse('petshop:pet_list')
+
+class PetUpdate(UpdateView):
+    model = Pet
+    template_name = 'pet/pet_create.html'
+    fields = '__all__'
+
+    def get_success_url(self):
+        return reverse('petshop:pet_list')
