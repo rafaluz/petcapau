@@ -4,6 +4,7 @@ from .models import Pet
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
+from django.db.models import Q
 
 def helloWorld(request):
     mensagem = 'Olá, mundo!'
@@ -23,6 +24,21 @@ def helloWorld(request):
 class PetList(ListView):
     model = Pet
     template_name = 'pet/pet_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        pets = Pet.objects.all()
+        
+        if self.request.GET.get('search_box'):
+            search_box = self.request.GET['search_box']
+            pets = Pet.objects.filter(Q(name__icontains = search_box) | Q(breed__icontains = search_box))
+
+        context.update({
+            'object_list': pets,
+            })
+
+        return context
 
 
 class PetDetail(DetailView):

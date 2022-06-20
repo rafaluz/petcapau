@@ -1,4 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %} Deletar Pet {% endblock %}
+{% block content %}
+
 <form method="post">{% csrf_token %}
-    <p>Tem certeza que deseja remover o pet "{{ object }}"?</p>
-    <input type="submit" value="Confirmar">
+    <div class="alert alert-danger" role="alert">
+        Tem certeza que deseja remover o pet "{{ object }}"?
+    </div>
+
+    <input class="btn btn-danger" type="submit" value="Confirmar">
+    <a class="btn btn-outline-danger" href="{% url 'petshop:pet_list' %}">Cancelar</a>
 </form>
+
+{% endblock %}

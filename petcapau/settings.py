@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     # my apps
     'petcapau.petshop',
     'petcapau.core',
+    # apps de terceiros
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

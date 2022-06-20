@@ -3,16 +3,44 @@
 {% block title %} Listar Pets {% endblock %}
 {% block content %}
 
-    <a href="{% url 'petshop:pet_create' %}"><button>Novo Pet</button></a>
+<h1>Listagem dos Pets</h1>
 
+<a class="btn btn-outline-success my-4" href="{% url 'petshop:pet_create' %}">Novo Pet</a>
+
+<form class="form-horizontal mb-4" action="." method="GET">
+    <div class="input-group">
+        <input id="search_box" name="search_box" type="text" placeholder="Informe o nome do pet ou a raça" class="form-control" autofocus="true" value="{{ request.GET.search_box }}">
+        <span class="input-group-btn">
+            <button type="submit" class="btn btn-default form-control" title="Clique para realizar a pesquisar">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+        </span>
+    </div>
+</form>
+
+{% if object_list.count > 0 %}
+<div class="row">
     {% for pet in object_list %}
-        <p>Nome: {{ pet.name }}</p>
-        <p>Espécie: {{ pet.species }}</p>
-        <p>Raça: {{ pet.breed }}</p>
-        <a href="{% url 'petshop:pet_detail' pet.pk  %}">Detalhes do Pet</a>
-        <a href="{% url 'petshop:pet_update' pet.pk %}">Editar</a>
-        <a href="{% url 'petshop:pet_delete' pet.pk %}">Remover</a>
-        <hr>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">{{ pet.name }}</h5>
+                    <p class="card-text">Espécie: {{ pet.species }}.</p>
+                    <p class="card-text">Espécie: {{ pet.breed }}.</p>
+                    <a class="btn btn-outline-info" href="{% url 'petshop:pet_detail' pet.pk  %}">Detalhes do Pet</a>
+                    <a class="btn btn-outline-primary" href="{% url 'petshop:pet_update' pet.pk %}">Editar</a>
+                    <a class="btn btn-outline-danger" href="{% url 'petshop:pet_delete' pet.pk %}">Remover</a>
+                </div>
+            </div>
+        </div>
     {% endfor %}
+</div>
+{% else %}
+
+    <p>Nenhum pet encontrado!</p>
+
+{% endif %}
 
 {% endblock content %}
+
+
